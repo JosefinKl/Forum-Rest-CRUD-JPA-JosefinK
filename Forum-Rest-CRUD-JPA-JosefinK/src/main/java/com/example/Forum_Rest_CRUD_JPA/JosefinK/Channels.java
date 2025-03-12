@@ -22,7 +22,7 @@ public class Channels {
     private String description;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "channelId", cascade = CascadeType.ALL)
     private List<Message> messages;
 
 //    @JsonIgnore

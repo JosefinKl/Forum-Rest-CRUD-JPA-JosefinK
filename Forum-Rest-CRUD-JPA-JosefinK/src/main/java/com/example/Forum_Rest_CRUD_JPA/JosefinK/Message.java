@@ -13,9 +13,7 @@ public class Message {
 
     private String message;
 
-    @ManyToOne
-    @JoinColumn(name = "channel_id")
-    private Channels channel;
+    public long channelId;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "Channels_id", referencedColumnName = "id")

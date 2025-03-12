@@ -15,11 +15,16 @@ import java.util.Optional;
 public class ChannelsController {
 
     ChannelsService channelsService;
+    MessageService messageService;
 
 
-    public ChannelsController(ChannelsService channelsService) {
+    public ChannelsController(ChannelsService channelsService , MessageService messageService) {
         this.channelsService = channelsService;
+        this.messageService = messageService;
     }
+
+
+
 
     @PostMapping
     public ResponseEntity<Channels> createChannelsByResponseBody(@Valid @RequestBody Channels channels) {
@@ -28,16 +33,29 @@ public class ChannelsController {
         return ResponseEntity.ok(c1);
     }
 
-    @PutMapping
-    public ResponseEntity<Channels> updateChannelsById(@Valid @RequestBody Channels newChannels) throws Exception {
-        Channels c1 = channelsService.updateChannels(newChannels);
-
-        if(c1 != null) {
-            return ResponseEntity.accepted().body(newChannels);
+    @PutMapping("/{id}")
+    public ResponseEntity<Message> createMessage (@PathVariable Long id, @Valid @RequestBody Message message) {
+        message.channelId = id;
+        Message m1 = messageService.addMessage(message);
+        if (m1 != null) {
+            return ResponseEntity.accepted().body(m1);
         }else{
             return ResponseEntity.notFound().build();
         }
     }
+
+
+// Update Channel, not in scope
+//    @PutMapping
+//    public ResponseEntity<Channels> updateChannelsById(@Valid @RequestBody Channels newChannels) throws Exception {
+//        Channels c1 = channelsService.updateChannels(newChannels);
+//
+//        if(c1 != null) {
+//            return ResponseEntity.accepted().body(newChannels);
+//        }else{
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     @GetMapping("/{id}")
     public Channels getChannelsById(@PathVariable Long id) {
