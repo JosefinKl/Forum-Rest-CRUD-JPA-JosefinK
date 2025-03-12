@@ -1,5 +1,7 @@
 package com.example.Forum_Rest_CRUD_JPA.JosefinK;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,6 +9,8 @@ import java.util.Optional;
 
 @Service
 public class ChannelsService {
+    @PersistenceContext
+    private EntityManager entityManager;
 
     ChannelsRepository repo;
 
@@ -28,5 +32,7 @@ public class ChannelsService {
 
     }
 
-    public void deleteChannel(long id) {repo.deleteById(id);}
+    public void deleteChannels(long id) {
+        repo.deleteById(id);
+    }
 }

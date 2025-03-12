@@ -11,12 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@Validated
+@RequestMapping("/channels")
 public class ChannelsController {
+
+    ChannelsService channelsService;
 
     List<Channel> channels = new ArrayList<>();
 
-    private final ChannelsService channelsService;
+
 
     public ChannelsController(ChannelsService channelsService) {
         this.channelsService = channelsService;
@@ -40,11 +42,22 @@ public class ChannelsController {
         }
     }
 
-    @GetMapping("/channels/{id}")
+    @GetMapping("/{id}")
     public Channels getChannelsById(@PathVariable Long id) {
         Optional<Channels> c1 = channelsService.getChannelsById(id);
         return c1.orElse(null);
     }
+
+    @GetMapping
+    public List<Channels> getAllChannels() {
+        return channelsService.getAllChannels();
+
+    }
+
+//    @DeleteMapping("/{id}")
+//    public void deleteChannelsById(@PathVariable Long id){
+//        ChannelsService.deleteChannels(id);
+//    }
 
 
 }
