@@ -54,10 +54,10 @@ public class ChannelsController {
 
     }
 
-//    @DeleteMapping("/{id}")
-//    public void deleteChannelsById(@PathVariable Long id){
-//        ChannelsService.deleteChannels(id);
-//    }
+    @DeleteMapping("/{id}")
+    public void deleteChannelsById(@PathVariable Long id){
+        channelsService.deleteChannels(id);
+    }
 
 
 }
