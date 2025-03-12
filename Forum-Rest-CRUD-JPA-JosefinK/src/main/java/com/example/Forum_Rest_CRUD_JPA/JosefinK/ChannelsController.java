@@ -16,9 +16,6 @@ public class ChannelsController {
 
     ChannelsService channelsService;
 
-    List<Channel> channels = new ArrayList<>();
-
-
 
     public ChannelsController(ChannelsService channelsService) {
         this.channelsService = channelsService;

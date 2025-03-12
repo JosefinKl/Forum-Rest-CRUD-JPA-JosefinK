@@ -1,7 +1,11 @@
 package com.example.Forum_Rest_CRUD_JPA.JosefinK;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Channels")
@@ -16,6 +20,14 @@ public class Channels {
 
     @NotEmpty
     private String description;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL)
+    private List<Message> messages;
+
+//    @JsonIgnore
+//    @OneToOne(mappedBy = "channel")
+//    private Message message;
 
 
     public Channels() {}
