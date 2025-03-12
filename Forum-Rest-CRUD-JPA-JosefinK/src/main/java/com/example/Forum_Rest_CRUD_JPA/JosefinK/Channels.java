@@ -17,7 +17,13 @@ public class Channels {
     @NotEmpty
     private String description;
 
+
     public Channels() {}
+
+    public Channels(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     public long getId() {
         return id;
