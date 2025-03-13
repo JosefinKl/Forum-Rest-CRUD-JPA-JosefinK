@@ -2,10 +2,7 @@ package com.example.Forum_Rest_CRUD_JPA.JosefinK;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/messages")
@@ -27,6 +24,11 @@ public class MessageController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteMessageById(@PathVariable Long id){
+        messageService.deleteMessage(id);
     }
 
 
