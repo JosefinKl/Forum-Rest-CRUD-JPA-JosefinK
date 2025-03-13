@@ -16,6 +16,10 @@ public class Message {
     public long channelId;
 
 
+//    @ManyToOne
+//    @JoinColumn(name="channelId")
+//    private Channel channel;
+
 
 
 

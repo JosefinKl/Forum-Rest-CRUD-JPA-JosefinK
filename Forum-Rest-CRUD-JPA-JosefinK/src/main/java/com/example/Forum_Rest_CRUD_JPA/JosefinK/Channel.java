@@ -20,10 +20,17 @@ public class Channel {
     @NotEmpty
     private String description;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "channelId", cascade = CascadeType.ALL)
     private List<Message> messages;
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public Channel() {}
 
@@ -58,10 +65,11 @@ public class Channel {
 
     @Override
     public String toString() {
-        return "Channels{" +
+        return "Channel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", messages=" + messages +
                 '}';
     }
 }

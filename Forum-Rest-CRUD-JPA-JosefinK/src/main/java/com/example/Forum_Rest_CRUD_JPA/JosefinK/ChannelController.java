@@ -51,7 +51,8 @@ public class ChannelController {
 
     @GetMapping
     public List<com.example.Forum_Rest_CRUD_JPA.JosefinK.Channel> getAllChannels() {
-        return channelService.getAllChannels();
+        var t = channelService.getAllChannels();
+        return t;
     }
 
     @DeleteMapping("/{id}")
