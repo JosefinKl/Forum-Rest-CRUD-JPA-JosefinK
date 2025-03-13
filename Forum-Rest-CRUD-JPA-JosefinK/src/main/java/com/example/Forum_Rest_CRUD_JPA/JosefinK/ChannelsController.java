@@ -18,12 +18,10 @@ public class ChannelsController {
     MessageService messageService;
 
 
-    public ChannelsController(ChannelsService channelsService , MessageService messageService) {
+    public ChannelsController(ChannelsService channelsService, MessageService messageService) {
         this.channelsService = channelsService;
         this.messageService = messageService;
     }
-
-
 
 
     @PostMapping
@@ -34,15 +32,28 @@ public class ChannelsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Message> createMessage (@PathVariable Long id, @Valid @RequestBody Message message) {
+    public ResponseEntity<Message> createMessage(@PathVariable Long id, @Valid @RequestBody Message message) {
         message.channelId = id;
         Message m1 = messageService.addMessage(message);
         if (m1 != null) {
             return ResponseEntity.accepted().body(m1);
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Message>>
+    getMessageByChannelId(@PathVariable Long id) {
+        List<Message> messages = messageService.getAllMessages(id);
+        if (messages.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(messages);
+        }
+    }
+
 
 
 // Update Channel, not in scope
@@ -57,11 +68,11 @@ public class ChannelsController {
 //        }
 //    }
 
-    @GetMapping("/{id}")
-    public Channels getChannelsById(@PathVariable Long id) {
-        Optional<Channels> c1 = channelsService.getChannelsById(id);
-        return c1.orElse(null);
-    }
+//    @GetMapping("/{id}")
+//    public Channels getChannelsById(@PathVariable Long id) {
+//        Optional<Channels> c1 = channelsService.getChannelsById(id);
+//        return c1.orElse(null);
+//    }
 
     @GetMapping
     public List<Channels> getAllChannels() {
