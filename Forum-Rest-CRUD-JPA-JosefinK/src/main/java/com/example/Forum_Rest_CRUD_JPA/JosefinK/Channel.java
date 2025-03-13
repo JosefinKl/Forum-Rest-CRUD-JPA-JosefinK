@@ -4,12 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="Channels")
-public class Channels {
+public class Channel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,14 +24,10 @@ public class Channels {
     @OneToMany(mappedBy = "channelId", cascade = CascadeType.ALL)
     private List<Message> messages;
 
-//    @JsonIgnore
-//    @OneToOne(mappedBy = "channel")
-//    private Message message;
 
+    public Channel() {}
 
-    public Channels() {}
-
-    public Channels(String name, String description) {
+    public Channel(String name, String description) {
         this.name = name;
         this.description = description;
     }

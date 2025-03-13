@@ -8,21 +8,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ChannelsService {
+public class ChannelService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    ChannelsRepository repo;
+    ChannelRepository repo;
 
-    public ChannelsService(ChannelsRepository repo) {this.repo = repo; }
+    public ChannelService(ChannelRepository repo) {this.repo = repo; }
 
-    public Channels addChannels(Channels channel) { return repo.save(channel); }
+    public Channel addChannel(Channel channel) { return repo.save(channel); }
 
-    public List<Channels> getAllChannels() { return repo.findAll(); }
+    public List<Channel> getAllChannels() { return repo.findAll(); }
 
-    public Optional<Channels> getChannelsById(Long id) { return repo.findById(id); }
+    public Optional<Channel> getChannelsById(Long id) { return repo.findById(id); }
 
-    public Channels updateChannels(Channels newChannel) {
+    public Channel updateChannels(Channel newChannel) {
         return repo.findById(newChannel.getId()).map(Channels ->{
             Channels.setName(newChannel.getName());
             Channels.setDescription(newChannel.getDescription());

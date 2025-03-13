@@ -2,32 +2,28 @@ package com.example.Forum_Rest_CRUD_JPA.JosefinK;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.channels.Channel;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/channels")
-public class ChannelsController {
+public class ChannelController {
 
-    ChannelsService channelsService;
+    ChannelService channelService;
     MessageService messageService;
 
 
-    public ChannelsController(ChannelsService channelsService, MessageService messageService) {
-        this.channelsService = channelsService;
+    public ChannelController(ChannelService channelService, MessageService messageService) {
+        this.channelService = channelService;
         this.messageService = messageService;
     }
 
 
     @PostMapping
-    public ResponseEntity<Channels> createChannelsByResponseBody(@Valid @RequestBody Channels channels) {
+    public ResponseEntity<Channel> createChannelsByResponseBody(@Valid @RequestBody Channel channel) {
 
-        Channels c1 = channelsService.addChannels(channels);
+        Channel c1 = channelService.addChannel(channel);
         return ResponseEntity.ok(c1);
     }
 
@@ -42,7 +38,6 @@ public class ChannelsController {
         }
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<List<Message>>
     getMessageByChannelId(@PathVariable Long id) {
@@ -52,6 +47,16 @@ public class ChannelsController {
         } else {
             return ResponseEntity.ok(messages);
         }
+    }
+
+    @GetMapping
+    public List<com.example.Forum_Rest_CRUD_JPA.JosefinK.Channel> getAllChannels() {
+        return channelService.getAllChannels();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteChannelsById(@PathVariable Long id){
+        channelService.deleteChannels(id);
     }
 
 
@@ -74,16 +79,7 @@ public class ChannelsController {
 //        return c1.orElse(null);
 //    }
 
-    @GetMapping
-    public List<Channels> getAllChannels() {
-        return channelsService.getAllChannels();
 
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteChannelsById(@PathVariable Long id){
-        channelsService.deleteChannels(id);
-    }
 
 
 }

@@ -15,9 +15,8 @@ public class Message {
 
     public long channelId;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "Channels_id", referencedColumnName = "id")
-//    private Channels channel;
+
+
 
 
 
