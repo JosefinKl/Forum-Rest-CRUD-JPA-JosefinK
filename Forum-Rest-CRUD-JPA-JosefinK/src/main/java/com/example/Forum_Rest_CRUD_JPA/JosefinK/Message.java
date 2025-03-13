@@ -1,5 +1,6 @@
 package com.example.Forum_Rest_CRUD_JPA.JosefinK;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -13,16 +14,22 @@ public class Message {
 
     private String message;
 
-    public long channelId;
+//    public long channelId;
 
 
-//    @ManyToOne
-//    @JoinColumn(name="channelId")
-//    private Channel channel;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "channel_id")
+    private Channel channel;
 
 
+    public Channel getChannel() {
+        return channel;
+    }
 
-
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
 
     public Message() {
     }

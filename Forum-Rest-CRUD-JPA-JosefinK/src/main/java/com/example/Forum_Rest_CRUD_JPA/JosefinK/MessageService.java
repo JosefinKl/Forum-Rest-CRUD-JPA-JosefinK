@@ -16,16 +16,21 @@ public class MessageService {
     }
 
     public Message addMessage(Message message) {
+
         return messageRepository.save(message);
     }
 
     public List<Message> getAllMessages(long channelId) {
-        return messageRepository.findAllByChannelId(channelId);
+        return messageRepository.findByChannelId(channelId);
     }
 
+    public Message updateMessage (Message newMessage) {
+        return messageRepository.findById(newMessage.getId()).map(Message ->{
+            Message.setMessage(newMessage.getMessage());
+            return messageRepository.save(Message);
+        }).orElse(null);
+    }
+    
 
-//    public List<Message> getMessagesByChannelId(long channelId) {
-//        return messageRepository.findByChannelId(channelId);
-//    }
 
 }

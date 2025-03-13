@@ -8,5 +8,5 @@ import java.util.Set;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
-    List<Message> findAllByChannelId(long channelId);
+    List<Message> findByChannelId(long channelId);
 }

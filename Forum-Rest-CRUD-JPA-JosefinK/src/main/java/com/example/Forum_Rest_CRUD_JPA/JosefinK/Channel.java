@@ -1,6 +1,7 @@
 package com.example.Forum_Rest_CRUD_JPA.JosefinK;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -21,8 +22,10 @@ public class Channel {
     private String description;
 
 
-    @OneToMany(mappedBy = "channelId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Message> messages;
+
 
     public List<Message> getMessages() {
         return messages;

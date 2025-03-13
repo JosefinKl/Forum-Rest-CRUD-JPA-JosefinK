@@ -27,9 +27,10 @@ public class ChannelController {
         return ResponseEntity.ok(c1);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Message> createMessage(@PathVariable Long id, @Valid @RequestBody Message message) {
-        message.channelId = id;
+    @PostMapping("/message/{id}")
+    public ResponseEntity<Message> createMessage(@PathVariable long id, @Valid @RequestBody Message message) {
+        Channel c = channelService.getChannelsById(id).orElse(null);
+        message.setChannel(c);
         Message m1 = messageService.addMessage(message);
         if (m1 != null) {
             return ResponseEntity.accepted().body(m1);
@@ -50,7 +51,7 @@ public class ChannelController {
     }
 
     @GetMapping
-    public List<com.example.Forum_Rest_CRUD_JPA.JosefinK.Channel> getAllChannels() {
+    public List<Channel> getAllChannels() {
         var t = channelService.getAllChannels();
         return t;
     }
