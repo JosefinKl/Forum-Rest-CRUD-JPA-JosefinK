@@ -10,6 +10,7 @@ import static org.mockito.Mockito.*;
 //Unit test for methods in a service class
 class ChannelServiceTest {
 
+    //Mock repository. Tests without database and Spring.
     ChannelRepository channelRepository = mock(ChannelRepository.class);
     ChannelService channelService = new ChannelService(channelRepository);
 
