@@ -14,6 +14,7 @@ class ChannelServiceTest {
     ChannelRepository channelRepository = mock(ChannelRepository.class);
     ChannelService channelService = new ChannelService(channelRepository);
 
+    //Test the get channel function.
     @Test
     void getAllChannelsShouldReturnChannels() {
         //arrange
@@ -32,6 +33,7 @@ class ChannelServiceTest {
         assertEquals(mockChannels, channels);
     }
 
+    //Test to add a channel
     @Test
     void addChannelShouldCallSaveRepository() {
         //arrange

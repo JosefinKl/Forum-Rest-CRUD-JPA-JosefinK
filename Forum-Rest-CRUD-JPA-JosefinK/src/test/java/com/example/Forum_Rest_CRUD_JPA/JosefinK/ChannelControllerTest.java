@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+//Component test
 @Transactional
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -43,7 +43,7 @@ class ChannelControllerTest {
 //    @LocalServerPort
 //    private int port;
 
-
+    //Test to control the creation of a new channel.
     @Test
     void TestCreateChannel() throws Exception {
 
