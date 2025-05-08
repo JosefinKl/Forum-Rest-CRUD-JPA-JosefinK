@@ -11,6 +11,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -59,31 +60,30 @@ class ChannelControllerTest {
                 .andExpect(jsonPath("$.description", is("Test Description")));
 
     }
-//Funkar ej, fixa om tid:
-//    @Test
-//    void TestAddAndDeleteChannels() throws Exception {
-//        //Arrange
-//        Channel newChannel = new Channel("TestChannel", "Test Description");
-//        when(channelRepository.findAll()).thenReturn(List.of(newChannel));
-//
-//        //Act & Assert adding channel
-//        mockMvc.perform(post("/channels")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(newChannel)))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name", is("TestChannel")))
-//                .andExpect(jsonPath("$.description", is("Test Description")));
-//
-//        verify(channelRepository).findAll();
-//
-//        doNothing().when(channelRepository).deleteById(anyLong());
-//
-//        //act
-//        List<Channel> savedChannel = channelRepository.findAll();
-//        Channel savedChannel1 = savedChannel.get(0);
-//
-//
-//        mockMvc.perform((RequestBuilder) delete("/channels/" + savedChannel1.getId()))
-//                .andExpect(status().isOk());
-//    }
+
+    @Test
+    void TestAddAndDeleteChannels() throws Exception {
+        //Arrange
+        Channel newChannel = new Channel("TestChannel", "Test Description");
+        when(channelRepository.findAll()).thenReturn(List.of(newChannel));
+
+        //Act & Assert adding channel
+        mockMvc.perform(post("/channels")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newChannel)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("TestChannel")))
+                .andExpect(jsonPath("$.description", is("Test Description")));
+
+
+        //act & Assert
+        when(channelRepository.findAll()).thenReturn(List.of(newChannel));
+        List<Channel> savedChannel = channelRepository.findAll();
+        Channel savedChannel1 = savedChannel.get(0);
+        long idSavedChannel1 = savedChannel1.getId();
+
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/channels/" + idSavedChannel1))
+                .andExpect(status().isOk());
+    }
 }

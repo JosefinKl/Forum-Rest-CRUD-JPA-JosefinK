@@ -16,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 //Integration test to test the whole chain, controller, service, repository and mySQL. Uses a test properties file to make sure a test database will be used for the test, hence isolated from production database.
-@ActiveProfiles("test") //to use a test database isolated from production database (with create-drop, hence it will be created at start and drop the table at end)
+@ActiveProfiles("test") //to use a test database isolated from production database (with create-drop, hence the table and its content will be created at start and dropped at the end)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ChannelControllerTestIntegrationTest {
     @LocalServerPort

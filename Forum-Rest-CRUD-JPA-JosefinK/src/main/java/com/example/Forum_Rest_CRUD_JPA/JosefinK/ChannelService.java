@@ -35,4 +35,12 @@ public class ChannelService {
     public void deleteChannels(long id) {
         repo.deleteById(id);
     }
+
+    //Function only to create a test with if and edge values
+    public boolean numberOverTen (long a){
+        if(a > 10){
+            return true;
+        } else
+            return false;
+    }
 }
